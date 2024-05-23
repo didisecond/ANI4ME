@@ -1,48 +1,53 @@
 // screens/HomeScreen.js
-import React, { useEffect, useState } from 'react';
-import { View, Text, Button, FlatList, StyleSheet } from 'react-native';
-import axios from 'axios';
+import React from 'react';
+import { View, Text, StyleSheet, ImageBackground, TouchableOpacity } from 'react-native';
 
-const API_URL = 'http://192.168.1.131:3000/api';
+// Importar la imagen de fondo
+import backgroundImage from '../assets/portada1.jpg';
+
 export default function HomeScreen({ navigation }) {
-    const [animes, setAnimes] = useState([]);
-
-    useEffect(() => {
-        axios.get(`${API_URL}/animes`)
-            .then(response => {
-                setAnimes(response.data);
-            })
-            .catch(error => {
-                console.error('Error al obtener los animes:', error);
-            });
-    }, []);
-
     return (
-        <View style={styles.container}>
-            <FlatList
-                data={animes}
-                keyExtractor={(item) => item._id.toString()}
-                renderItem={({ item }) => (
-                    <View style={styles.item}>
-                        <Text>{item.name}</Text>
-                        <Button
-                            title="Ver Detalles"
-                            onPress={() => navigation.navigate('Details', { anime: item })}
-                        />
-                    </View>
-                )}
-            />
-        </View>
+        <ImageBackground 
+            source={backgroundImage}
+            style={styles.background}
+        >
+            <View style={styles.container}>
+                <TouchableOpacity style={styles.button} onPress={() => navigation.navigate('AnimeFilter')}>
+                    <Text style={styles.buttonText}>Filtrar Animes</Text>
+                </TouchableOpacity>
+                <TouchableOpacity style={styles.button} onPress={() => navigation.navigate('Login')}>
+                    <Text style={styles.buttonText}>Login / Crear Cuenta</Text>
+                </TouchableOpacity>
+                <TouchableOpacity style={styles.button} onPress={() => navigation.navigate('SocialMedia')}>
+                    <Text style={styles.buttonText}>Redes Sociales</Text>
+                </TouchableOpacity>
+                <TouchableOpacity style={styles.button} onPress={() => navigation.navigate('Favorites')}>
+                    <Text style={styles.buttonText}>Mis Animes Favoritos</Text>
+                </TouchableOpacity>
+            </View>
+        </ImageBackground>
     );
 }
 
 const styles = StyleSheet.create({
+    background: {
+        flex: 1,
+        width: '100%',
+        height: '100%',
+    },
     container: {
         flex: 1,
-        paddingTop: 50,
-        paddingHorizontal: 20,
+        justifyContent: 'center',
+        alignItems: 'center',
     },
-    item: {
-        marginBottom: 20,
+    button: {
+        backgroundColor: '#000000aa',
+        padding: 20,
+        margin: 10,
+        borderRadius: 10,
+    },
+    buttonText: {
+        color: '#fff',
+        fontSize: 18,
     },
 });
