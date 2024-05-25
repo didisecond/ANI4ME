@@ -1,11 +1,25 @@
-// screens/HomeScreen.js
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { View, Text, StyleSheet, ImageBackground, TouchableOpacity } from 'react-native';
 
 // Importar la imagen de fondo
 import backgroundImage from '../assets/portada1.jpg';
 
-export default function HomeScreen({ navigation }) {
+export default function HomeScreen({ route, navigation }) {
+    const [isLoggedIn, setIsLoggedIn] = useState(false);
+    const [user, setUser] = useState(null);
+
+    useEffect(() => {
+        if (route.params?.user) {
+            setUser(route.params.user);
+            setIsLoggedIn(true);
+        }
+    }, [route.params?.user]);
+
+    const handleLogout = () => {
+        setIsLoggedIn(false);
+        setUser(null);
+    };
+
     return (
         <ImageBackground 
             source={backgroundImage}
@@ -15,9 +29,15 @@ export default function HomeScreen({ navigation }) {
                 <TouchableOpacity style={styles.button} onPress={() => navigation.navigate('AnimeFilter')}>
                     <Text style={styles.buttonText}>Filtrar Animes</Text>
                 </TouchableOpacity>
-                <TouchableOpacity style={styles.button} onPress={() => navigation.navigate('Login')}>
-                    <Text style={styles.buttonText}>Login / Crear Cuenta</Text>
-                </TouchableOpacity>
+                {isLoggedIn ? (
+                    <TouchableOpacity style={styles.button} onPress={handleLogout}>
+                        <Text style={styles.buttonText}>Salir</Text>
+                    </TouchableOpacity>
+                ) : (
+                    <TouchableOpacity style={styles.button} onPress={() => navigation.navigate('Login')}>
+                        <Text style={styles.buttonText}>Login / Crear Cuenta</Text>
+                    </TouchableOpacity>
+                )}
                 <TouchableOpacity style={styles.button} onPress={() => navigation.navigate('SocialMedia')}>
                     <Text style={styles.buttonText}>Redes Sociales</Text>
                 </TouchableOpacity>
