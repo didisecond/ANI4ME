@@ -1,7 +1,6 @@
+// screens/HomeScreen.js
 import React, { useState, useEffect } from 'react';
 import { View, Text, StyleSheet, ImageBackground, TouchableOpacity } from 'react-native';
-
-// Importar la imagen de fondo
 import backgroundImage from '../assets/portada1.jpg';
 
 export default function HomeScreen({ route, navigation }) {
@@ -26,8 +25,11 @@ export default function HomeScreen({ route, navigation }) {
             style={styles.background}
         >
             <View style={styles.container}>
-                <TouchableOpacity style={styles.button} onPress={() => navigation.navigate('AnimeFilter')}>
-                    <Text style={styles.buttonText}>Filtrar Animes</Text>
+                <TouchableOpacity style={styles.button} onPress={() => navigation.navigate('AnimeSearch')}>
+                    <Text style={styles.buttonText}>Buscar Animes</Text>
+                </TouchableOpacity>
+                <TouchableOpacity style={styles.button} onPress={() => navigation.navigate('AnimeGenreFilter')}>
+                    <Text style={styles.buttonText}>Filtrar Animes por Género</Text>
                 </TouchableOpacity>
                 {isLoggedIn ? (
                     <TouchableOpacity style={styles.button} onPress={handleLogout}>

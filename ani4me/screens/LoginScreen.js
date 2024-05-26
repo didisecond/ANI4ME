@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
-import { View, Text, TextInput, Button, StyleSheet, Alert, KeyboardAvoidingView, ScrollView } from 'react-native';
+import { View, Text, TextInput, Button, StyleSheet, Alert, KeyboardAvoidingView, ScrollView, ImageBackground } from 'react-native';
 import axios from 'axios';
+import backgroundImage from '../assets/portada1.jpg';
 
 const API_URL = 'http://192.168.1.131:3000/api';
 
@@ -43,48 +44,55 @@ export default function LoginScreen({ navigation }) {
     };
 
     return (
-        <KeyboardAvoidingView style={styles.container} behavior="padding">
-            <ScrollView contentContainerStyle={styles.scrollView}>
-                <Text style={styles.title}>{isRegistering ? 'Registro' : 'Inicio de Sesión'}</Text>
-                {isRegistering && (
+        <ImageBackground source={backgroundImage} style={styles.background}>
+            <KeyboardAvoidingView style={styles.container} behavior="padding">
+                <ScrollView contentContainerStyle={styles.scrollView}>
+                    <Text style={styles.title}>{isRegistering ? 'Registro' : 'Inicio de Sesión'}</Text>
+                    {isRegistering && (
+                        <TextInput
+                            style={styles.input}
+                            placeholder="Nombre"
+                            value={name}
+                            onChangeText={setName}
+                        />
+                    )}
                     <TextInput
                         style={styles.input}
-                        placeholder="Nombre"
-                        value={name}
-                        onChangeText={setName}
+                        placeholder="Correo electrónico"
+                        value={email}
+                        onChangeText={setEmail}
+                        keyboardType="email-address"
+                        autoCapitalize="none"
                     />
-                )}
-                <TextInput
-                    style={styles.input}
-                    placeholder="Correo electrónico"
-                    value={email}
-                    onChangeText={setEmail}
-                    keyboardType="email-address"
-                    autoCapitalize="none"
-                />
-                <TextInput
-                    style={styles.input}
-                    placeholder="Contraseña"
-                    value={password}
-                    onChangeText={setPassword}
-                    secureTextEntry
-                />
-                {isRegistering ? (
-                    <Button title="Registrar" onPress={handleRegister} />
-                ) : (
-                    <Button title="Iniciar Sesión" onPress={handleLogin} />
-                )}
-                <Button
-                    title={isRegistering ? '¿Ya tienes una cuenta? Inicia sesión' : '¿No tienes una cuenta? Regístrate'}
-                    onPress={() => setIsRegistering(!isRegistering)}
-                    color="#999"
-                />
-            </ScrollView>
-        </KeyboardAvoidingView>
+                    <TextInput
+                        style={styles.input}
+                        placeholder="Contraseña"
+                        value={password}
+                        onChangeText={setPassword}
+                        secureTextEntry
+                    />
+                    {isRegistering ? (
+                        <Button title="Registrar" onPress={handleRegister} />
+                    ) : (
+                        <Button title="Iniciar Sesión" onPress={handleLogin} />
+                    )}
+                    <Button
+                        title={isRegistering ? '¿Ya tienes una cuenta? Inicia sesión' : '¿No tienes una cuenta? Regístrate'}
+                        onPress={() => setIsRegistering(!isRegistering)}
+                        color="#999"
+                    />
+                </ScrollView>
+            </KeyboardAvoidingView>
+        </ImageBackground>
     );
 }
 
 const styles = StyleSheet.create({
+    background: {
+        flex: 1,
+        width: '100%',
+        height: '100%',
+    },
     container: {
         flex: 1,
     },
@@ -97,6 +105,7 @@ const styles = StyleSheet.create({
     title: {
         fontSize: 24,
         marginBottom: 20,
+        color: '#fff',
     },
     input: {
         width: '100%',
@@ -106,5 +115,6 @@ const styles = StyleSheet.create({
         borderRadius: 5,
         paddingHorizontal: 10,
         marginBottom: 10,
+        backgroundColor: '#fff',
     },
 });
