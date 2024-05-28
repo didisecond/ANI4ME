@@ -43,9 +43,7 @@ export default function HomeScreen({ route, navigation }) {
                 <TouchableOpacity style={styles.button} onPress={() => navigation.navigate('SocialMedia')}>
                     <Text style={styles.buttonText}>Redes Sociales</Text>
                 </TouchableOpacity>
-                <TouchableOpacity style={styles.button} onPress={() => navigation.navigate('Favorites')}>
-                    <Text style={styles.buttonText}>Mis Animes Favoritos</Text>
-                </TouchableOpacity>
+                
             </View>
         </ImageBackground>
     );
