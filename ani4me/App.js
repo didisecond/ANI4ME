@@ -8,6 +8,8 @@ import AnimeSearchScreen from './screens/AnimeSearchScreen';
 import AnimeGenreFilterScreen from './screens/AnimeGenreFilterScreen';
 import AnimeDetailsScreen from './screens/AnimeDetailsScreen';
 import SocialMediaScreen from './screens/SocialMediaScreen';
+import FavoriteAndFollowedScreen from './screens/FavoriteAndFollowedScreen';
+
 const Stack = createStackNavigator();
 
 export default function App() {
@@ -20,6 +22,7 @@ export default function App() {
                 <Stack.Screen name="AnimeGenreFilter" component={AnimeGenreFilterScreen} />
                 <Stack.Screen name="AnimeDetails" component={AnimeDetailsScreen} />
                 <Stack.Screen name="SocialMedia" component={SocialMediaScreen} />
+                <Stack.Screen name="FavoriteAndFollowed" component={FavoriteAndFollowedScreen} />
             </Stack.Navigator>
         </NavigationContainer>
     );
