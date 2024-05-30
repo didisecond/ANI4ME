@@ -1,9 +1,9 @@
+// screens/LoginScreen.js
 import React, { useState, useEffect } from 'react';
 import { View, Text, TextInput, Button, StyleSheet, Alert, KeyboardAvoidingView, ScrollView, ImageBackground } from 'react-native';
 import axios from 'axios';
 import backgroundImage from '../assets/portada1.jpg';
-
-const API_URL = 'http://192.168.1.131:3000/api';
+import { API_URL } from '../config';
 
 export default function LoginScreen({ navigation }) {
     const [name, setName] = useState('');

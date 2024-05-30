@@ -3,8 +3,7 @@ import React, { useState, useEffect } from 'react';
 import { View, Text, TextInput, FlatList, TouchableOpacity, StyleSheet, ImageBackground, Image } from 'react-native';
 import axios from 'axios';
 import backgroundImage from '../assets/portada1.jpg';
-
-const API_URL = 'http://192.168.1.131:3000/api';
+import { API_URL } from '../config';
 
 export default function AnimeSearchScreen({ navigation }) {
     const [animes, setAnimes] = useState([]);
